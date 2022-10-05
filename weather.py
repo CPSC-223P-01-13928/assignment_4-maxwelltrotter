@@ -52,3 +52,25 @@ def tot_rain(data, date):
         if date == key[0:8]:
             rain_sum += date[key][r]
     return rain_sum
+
+def report_daily(data, date):
+    display = "========================= DAILY REPORT ========================\n"
+    display += "Date                      Time  Temperature  Humidity  Rainfall\n"
+    display += "====================  ========  ===========  ========  ========\n"
+    
+    
+    for key in data:    
+        if key[0,8]:  # 4-6 things in the string (doesn't check the very last one)
+            # mdy is the Month DD, YYYY form of the date (ensure that the slice is a string, because
+            # depending on the string it may try to return an integer instead)
+            mdy = calendar.month_name(int(date[4:6])) + str(int(date[6:8])), "," + str(int(date[0:4]))
+            # hms is the HH:MM:SS form of the time
+            hms = key[8:10] + ":" + key[10:12] + ":" + key[12:14]
+
+            t = data[key][t]
+            h = data[key][h]
+            r = data[key][r]
+
+            # Number of spaces between
+            display += f'{mdy:22}{hms:8}{t:13}{h:10}{r:10.2f}' + '\n'
+    return display
