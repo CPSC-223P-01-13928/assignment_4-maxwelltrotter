@@ -31,7 +31,7 @@ def min_temperature(data, date):
     return temp_min
 
 def max_humidity(data, date):
-    humid_max = date[0][h]
+    humid_max = 0
     for key in data:
         if date[key][h] > humid_max:
             humid_max = data[key][h]  # Key of data, temperature value
@@ -39,10 +39,16 @@ def max_humidity(data, date):
 
 
 def min_humidity(data, date):
-    humid_min = date[0][h]
+    humid_min = 100
     for key in data:
         if date == key[0:8]:             # This is passing until 8th
             if date[key][h] < humid_min:
                 humid_min = data[key][h]  # Key of data, temperature value
     return humid_min
 
+def tot_rain(data, date):
+    rain_sum = 0
+    for key in data:
+        if date == key[0:8]:
+            rain_sum += date[key][r]
+    return rain_sum
